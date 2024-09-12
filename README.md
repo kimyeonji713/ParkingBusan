@@ -8,6 +8,8 @@
 
 > https://www.data.go.kr/data/15004683/openapi.do
 
+> https://apis.map.kakao.com/web/guide/
+
 ### 앱 이름
 
 > 파킹 어디?

@@ -1,3 +1,9 @@
+import { Loading } from "../../components/Loading";
+
 export const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
 };
