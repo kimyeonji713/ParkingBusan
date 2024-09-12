@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+export const colors = {
+  point: "#A73121",
+};
+
 export const GlobalStyled = createGlobalStyle`
     ${reset}
 
@@ -11,4 +15,13 @@ export const GlobalStyled = createGlobalStyle`
         color: black;
         font-family: "Nanum Gothic", sans-serif;
     }
+
+    ul,li{
+        list-style: none;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    
 `;
