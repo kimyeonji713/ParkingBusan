@@ -20,6 +20,7 @@ export const parking = () =>
 
 export const allParking = () => {
   const allUrl =
-    baseUrl + `serviceKey=${serviceKey}&pageNo=1&numOfRows=615&resultType=json`;
+    baseUrl +
+    `BusanPblcPrkngInfoService/getPblcPrkngInfo?serviceKey=${serviceKey}&pageNo=1&numOfRows=615&resultType=json`;
   return fetch(allUrl).then((res) => res.json());
 };
