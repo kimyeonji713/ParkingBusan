@@ -1,5 +1,5 @@
 import { FaCarSide } from "react-icons/fa";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   width: 100%;
@@ -13,16 +13,65 @@ const Wrap = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
+
+const textAni = keyframes`
+0%{
+  opacity: 0;
+}
+
+50%{
+  opacity: 1;
+}
+100%{
+  opacity: 0;
+}
+`;
+
 const Text = styled.div`
   font-size: 18px;
   font-weight: 400;
+  animation: ${textAni} 2.2s infinite;
 `;
+
+const carAni = keyframes`
+
+0%{
+  transform: translateY(3px);
+}
+
+50%{
+  transform: translateY(0px);
+}
+100%{
+  transform: translateY(3px);
+}
+`;
+
+const circleAni = keyframes`
+0%{
+  transform: translateY(3px);
+  opacity: 0;
+}
+
+50%{
+  transform: translateY(0px);
+  opacity: 1;
+}
+100%{
+  transform: translateY(3px);
+  opacity: 0;
+}
+`;
+
 const Icon = styled.div`
   margin-bottom: 15px;
   font-size: 44px;
   display: flex;
   justify-content: center;
   color: #a73121;
+  .car {
+    animation: ${carAni} 1.5s infinite;
+  }
 `;
 
 const CircleWrap = styled.div`
@@ -36,6 +85,7 @@ const BigCircle = styled.div`
   border-radius: 50%;
   background-color: lightgray;
   margin-right: 7px;
+  animation: ${circleAni} 1.5s infinite;
 `;
 const SmallCircle = styled.div`
   width: 8px;
@@ -43,6 +93,7 @@ const SmallCircle = styled.div`
   border-radius: 50%;
   background-color: lightgray;
   margin-right: 7px;
+  animation: ${circleAni} 2s infinite;
 `;
 
 export const Loading = () => {
@@ -54,7 +105,7 @@ export const Loading = () => {
             <SmallCircle />
             <BigCircle />
           </CircleWrap>
-          <FaCarSide />
+          <FaCarSide className="car" />
         </Icon>
         <Text>위치를 불러오고 있어요!</Text>
       </Wrap>
