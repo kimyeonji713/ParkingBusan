@@ -33,7 +33,7 @@ export const Home = ({ onMapLoad }) => {
     })();
   }, []);
 
-  // console.log(parkAllData);
+  console.log(parkAllData);
   return (
     <>
       {isLoading ? (

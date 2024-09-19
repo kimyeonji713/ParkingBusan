@@ -128,7 +128,7 @@ export const KakaoMap = ({ onMapLoad, parkAllData }) => {
               });
 
               content.querySelector(".add").onclick = () => {
-                navigate(`/detail/${park.id}`);
+                navigate(`/detail/${park.mgntNum}`);
               };
 
               content.querySelector(".close").onclick = () => {
