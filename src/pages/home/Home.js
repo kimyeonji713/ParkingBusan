@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import { allParking } from "../../api";
 import { Loading } from "../../components/Loading";
 import { PageTitle } from "../../components/PageTitle";
+import { KakaoMap } from "../../components/KakaoMap";
+import styled from "styled-components";
 
-export const Home = () => {
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+`;
+
+export const Home = ({ onMapLoad }) => {
   const [allData, setAllData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -18,14 +26,14 @@ export const Home = () => {
           },
         } = await allParking();
         setAllData(item);
-        // console.log(item);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
 
-  console.log(allData);
+  // console.log(allData);
   return (
     <>
       {isLoading ? (
@@ -34,7 +42,9 @@ export const Home = () => {
         <>
           <PageTitle title={"Home"} />
 
-          <div>home</div>
+          <Container>
+            <KakaoMap onMapLoad={onMapLoad} allData={allData} />
+          </Container>
         </>
       )}
     </>

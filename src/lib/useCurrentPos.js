@@ -10,6 +10,9 @@ export const useCurrentPos = () => {
     const {
       coords: { latitude, longitude },
     } = pos;
+
+    setLat(latitude);
+    setLon(longitude);
   };
 
   useEffect(() => {
