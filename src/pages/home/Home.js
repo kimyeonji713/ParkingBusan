@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 export const Home = ({ onMapLoad }) => {
-  const [allData, setAllData] = useState();
+  const [parkAllData, setParkAllData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const Home = ({ onMapLoad }) => {
             },
           },
         } = await allParking();
-        setAllData(item);
+        setParkAllData(item);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -33,7 +33,7 @@ export const Home = ({ onMapLoad }) => {
     })();
   }, []);
 
-  // console.log(allData);
+  // console.log(parkAllData);
   return (
     <>
       {isLoading ? (
@@ -43,7 +43,7 @@ export const Home = ({ onMapLoad }) => {
           <PageTitle title={"Home"} />
 
           <Container>
-            <KakaoMap onMapLoad={onMapLoad} allData={allData} />
+            <KakaoMap onMapLoad={onMapLoad} parkAllData={parkAllData} />
           </Container>
         </>
       )}

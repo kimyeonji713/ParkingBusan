@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useCurrentPos } from "../lib/useCurrentPos";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { colors } from "../GlobalStyled";
 
 const { kakao } = window;
 
@@ -9,7 +10,11 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
 `;
-export const KakaoMap = ({ onMapLoad, allData }) => {
+
+const Box = styled.div`
+  z-index: 9;
+`;
+export const KakaoMap = ({ onMapLoad, parkAllData }) => {
   const { lat, lon } = useCurrentPos();
   const mapRef = useRef(null);
   const overlaysRef = useRef([]);
@@ -22,7 +27,7 @@ export const KakaoMap = ({ onMapLoad, allData }) => {
         const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
         const options = {
           //지도를 생성할 때 필요한 기본 옵션
-          center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+          center: new kakao.maps.LatLng(lat, lon), //지도의 중심좌표.
           level: 3, //지도의 레벨(확대, 축소 정도)
         };
 
@@ -64,7 +69,7 @@ export const KakaoMap = ({ onMapLoad, allData }) => {
           const swLatLng = bounds.getSouthWest(); // 남서쪽 좌표
           const neLatLng = bounds.getNorthEast(); // 북동쪽 좌표
 
-          allData.forEach((park) => {
+          parkAllData.forEach((park) => {
             const markerPosition = new kakao.maps.LatLng(
               park.xCdnt,
               park.yCdnt
@@ -84,27 +89,29 @@ export const KakaoMap = ({ onMapLoad, allData }) => {
               marker.setMap(map);
 
               const content = document.createElement("div");
-              content.style.padding = "10px";
+              content.style.padding = "10px 15px";
               content.style.borderRadius = "10px";
-              content.style.backgroundColor = "white";
+              content.style.backgroundColor = "rgba(255,255,255,0.9)";
               content.style.boxShadow = "0px 1px 2px rgba(0, 0, 0, 0.1)";
               content.style.boxSizing = "border-box";
-              content.style.color = "#222";
+              content.style.color = `${colors.pointGray}`;
 
               content.innerHTML = `
-              <h4 style="margin-bottom: 5px; font-weight: 700;">${park.pkNam}</h4>              
+              <h4 style="margin-bottom: 10px; font-weight: 700;">${park.pkNam}</h4>              
               <ul style="list-style-type: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 5px; font-size: 14px;"><strong>주소 : </strong> <span style="font-weight: 400;">부산광역시 ${park.jibunAddr}<span></li>
-                <li style="margin-bottom: 5px; font-size: 14px;"><strong>요금 : </strong><span style="font-weight: 400;">${park.pkBascTime} 분 당 ${park.tenMin}원<span></li>
-                <li class="add" style="margin-bottom: 5px; font-size: 14px; font-weight: 700; color: #ffa825; cursor: pointer;">자세히 보기</li>
+                <li style="margin-bottom: 0px; font-size: 14px;"><strong>주소 </strong> <p style="font-weight: 400; margin-top: 0px;">부산광역시 ${park.jibunAddr}</p></li>
+                <li style="margin-bottom: 15px; font-size: 14px;"><strong>요금 </strong><p style="font-weight: 400; margin-top: 0px;">${park.pkBascTime} 분 당 ${park.tenMin}원</p></li>
+                <li class="add" style="margin-bottom: 5px; font-size: 14px; font-weight: 700; color: ${colors.subRed}; cursor: pointer;">자세히 보기</li>
               </ul>
               <div style="text-align: right; margin-top: 10px;">
                 <button style="
                   background: none;
                   border: none;
-                  color: #ffa825;
+                  color: ${colors.subRed};
                   cursor: pointer;
                   font-size: 12px;
+                  font-weight: 700;
+                  margin-right: -5px;
                 " class="close">닫기</button>
               </div>
             `;
@@ -145,6 +152,6 @@ export const KakaoMap = ({ onMapLoad, allData }) => {
         console.log(error);
       }
     }
-  }, [lat, lon, onMapLoad, allData, navigate]);
+  }, [lat, lon, onMapLoad, parkAllData, navigate]);
   return <Container id="map"></Container>;
 };
