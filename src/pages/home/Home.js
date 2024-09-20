@@ -6,7 +6,7 @@ import { KakaoMap } from "../../components/KakaoMap";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 100%;
+  width: 500px;
   height: 100vh;
   margin: 0 auto;
 `;
