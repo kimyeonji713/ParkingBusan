@@ -46,7 +46,9 @@ const Con = styled.button`
 const InfoWrap = styled.div``;
 const Close = styled.div``;
 const Info = styled.div``;
-const Git = styled.div``;
+const Git = styled.div`
+  display: ${(props) => props.$showAct};
+`;
 
 export const Footer = () => {
   const [show, setShow] = useState(false);
@@ -94,7 +96,7 @@ export const Footer = () => {
           </Close>
           <Info>
             <p>&copy; KimYeonJI 2024</p>
-            <Git>
+            <Git $showAct={show ? "block" : "none"}>
               <p>github: </p>
               <a href="https://github.com/kimyeonji713">
                 https://github.com/kimyeonji713
