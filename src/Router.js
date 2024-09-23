@@ -27,18 +27,16 @@ const Router = () => {
     map?.panTo(moveLatLon);
   };
   return (
-    <HelmetProvider>
+    <HashRouter>
       <Header />
-      <HashRouter>
-        <Routes>
-          <Route path={routes.home} element={<Home onMapLoad={MapHandler} />} />
-          <Route path={routes.detail} element={<Detail />} />
-          <Route path={routes.search} element={<Search />} />
-          <Route path={routes.favor} element={<Favorite />} />
-        </Routes>
-      </HashRouter>
+      <Routes>
+        <Route path={routes.home} element={<Home onMapLoad={MapHandler} />} />
+        <Route path={routes.detail} element={<Detail />} />
+        <Route path={routes.search} element={<Search />} />
+        <Route path={routes.favor} element={<Favorite />} />
+      </Routes>
       <Footer onPanTo={panTo} />
-    </HelmetProvider>
+    </HashRouter>
   );
 };
 
