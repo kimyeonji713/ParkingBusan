@@ -4,11 +4,28 @@ import { Loading } from "../../components/Loading";
 import { PageTitle } from "../../components/PageTitle";
 import { KakaoMap } from "../../components/KakaoMap";
 import styled from "styled-components";
+import { size } from "../../GlobalStyled";
+import { Header } from "../../components/Header";
 
 const Container = styled.div`
-  width: 500px;
+  width: 100%;
   height: 800px;
   margin: 0 auto;
+  @media screen and (max-width: ${size.size_1024};) {
+    width: 1024px;
+  }
+
+  @media screen and (max-width: ${size.size_768};) {
+    width: 768px;
+  }
+
+  @media screen and (max-width: ${size.size_435};) {
+    width: 435px;
+  }
+
+  @media screen and (max-width: ${size.size_368};) {
+    width: 368px;
+  }
 `;
 
 export const Home = ({ onMapLoad }) => {
@@ -41,7 +58,6 @@ export const Home = ({ onMapLoad }) => {
       ) : (
         <>
           <PageTitle title={"Home"} />
-
           <Container>
             <KakaoMap onMapLoad={onMapLoad} parkAllData={parkAllData} />
           </Container>

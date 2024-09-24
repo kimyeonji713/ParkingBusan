@@ -1,5 +1,3 @@
-import { HelmetProvider } from "react-helmet-async";
-import { Header } from "./components/Header";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/home/Home";
 import { Detail } from "./pages/detail/Detail";
@@ -28,7 +26,6 @@ const Router = () => {
   };
   return (
     <HashRouter>
-      <Header />
       <Routes>
         <Route path={routes.home} element={<Home onMapLoad={MapHandler} />} />
         <Route path={routes.detail} element={<Detail />} />

@@ -5,6 +5,15 @@ export const colors = {
   point: "#A73121",
   subRed: "#921A40",
   pointGray: "#3C3D37",
+  fontGray_1: "lightgray",
+  fontGray_2: "gray",
+};
+
+export const size = {
+  size_1024: "1024px",
+  size_768: "768px",
+  size_435: "435px",
+  size_368: "368px",
 };
 
 export const GlobalStyled = createGlobalStyle`
@@ -13,7 +22,7 @@ export const GlobalStyled = createGlobalStyle`
     *{box-sizing:border-box}
 
     body{
-        background-color: #f1f1f1;
+        background-color: lightgray;
         color: black;
         font-family: "Nanum Gothic", sans-serif;
     }
