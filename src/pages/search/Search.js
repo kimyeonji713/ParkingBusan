@@ -6,6 +6,7 @@ import { Loading } from "../../components/Loading";
 import { allParking } from "../../api";
 import { FiSearch } from "react-icons/fi";
 import { ErrorMessage } from "../../components/ErrorMessage";
+import { SearchResult } from "./SearchResult";
 
 const Container = styled.div`
   width: 100%;
@@ -22,11 +23,40 @@ const Container = styled.div`
 //   transform: translateX(-60%);
 // `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  position: relative;
+  input {
+    all: unset;
+    width: 600px;
+    height: 45px;
+    border-bottom: 2px solid ${colors.point};
+    position: absolute;
+    top: 150px;
+    left: 55%;
+    transform: translateX(-60%);
+    color: ${colors.pointGray};
+    font-weight: 700;
+    padding: 0px 5px;
+
+    &::placeholder {
+      color: ${colors.fontGray_2};
+      font-weight: 400;
+    }
+  }
+  button {
+    all: unset;
+    position: absolute;
+    top: 165px;
+    right: 32%;
+    transform: translateX(-60%);
+    color: ${colors.fontGray_2};
+  }
+`;
 
 export const Search = () => {
   const [searchData, setSearchData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [keyData, setKeyData] = useState("");
 
   const {
     register,
@@ -35,29 +65,34 @@ export const Search = () => {
     watch,
   } = useForm();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          response: {
-            body: {
-              items: { item },
-            },
+  const onSearchResult = async (data) => {
+    const { keyword } = data;
+    try {
+      const {
+        response: {
+          body: {
+            items: { item },
           },
-        } = await allParking();
-        setSearchData(item);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+        },
+      } = await allParking();
+
+      const searchResult = searchData.filter(
+        (item) =>
+          item.pkNam.includes(keyword) ||
+          item.jibunAddr.includes(keyword) ||
+          item.doroAddr.includes(keyword)
+      );
+
+      setSearchData(searchResult);
+      setKeyData(keyword);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const nullKeyword = watch("keyword");
 
-  const onSearchResult = (data) => {
-    const { keyword } = data;
-  };
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSearchResult)}>
@@ -75,14 +110,17 @@ export const Search = () => {
 
         <ErrorMessage>{errors?.keyword?.message}</ErrorMessage>
       </Form>
-      {!isLoading ? (
-        <>
-          {searchData?.length === 0 && nullKeyword && (
-            <div>일치하는 검색 결과가 없습니다.</div>
-          )}
-        </>
-      ) : (
-        <div>search</div>
+
+      {searchData?.length === 0 && nullKeyword && (
+        <div>일치하는 검색 결과가 없습니다.</div>
+      )}
+
+      {searchData?.length > 0 && (
+        <SearchResult
+          searchData={searchData}
+          keyData={keyData}
+          isLoading={isLoading}
+        />
       )}
     </Container>
   );
