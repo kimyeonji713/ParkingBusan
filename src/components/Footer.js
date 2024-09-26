@@ -1,11 +1,10 @@
 import { FaRegHeart } from "react-icons/fa";
 import { FiHome, FiInfo } from "react-icons/fi";
-import { IoClose, IoHomeOutline, IoSearch } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { routes } from "../routes";
-import { HiMenuAlt1 } from "react-icons/hi";
-import { colors } from "../GlobalStyled";
+import { colors, size } from "../GlobalStyled";
 import { useState } from "react";
 import { IoIosMore } from "react-icons/io";
 
@@ -13,10 +12,44 @@ const Container = styled.div`
   width: 80px;
   height: 100%;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   background-color: white;
   z-index: 10;
+
+  @media screen and (max-width: ${size.size_500}) {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    z-index: 10;
+    border-radius: 20px 20px 0 0;
+  }
+  @media screen and (max-width: ${size.size_435}) {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    z-index: 10;
+    border-radius: 20px 20px 0 0;
+  }
+  @media screen and (max-width: ${size.size_368}) {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    z-index: 10;
+    border-radius: 20px 20px 0 0;
+  }
 `;
 const Wrap = styled.div`
   display: flex;
@@ -24,8 +57,18 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   margin: 20px 20px;
-  .homeIcon {
-    margin-bottom: 20px;
+  @media screen and (max-width: ${size.size_500}) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 20px;
+  }
+  @media screen and (max-width: ${size.size_435}) {
+    margin: 0px 10px;
+  }
+  @media screen and (max-width: ${size.size_368}) {
+    margin: 0;
   }
 `;
 const Con = styled.button`
@@ -35,43 +78,134 @@ const Con = styled.button`
   text-align: center;
   font-size: 25px;
   cursor: pointer;
-  color: ${colors.point};
+  color: ${colors.pointGray};
 
-  .active {
-    background-color: ${colors.point};
+  .homeIcon {
+    margin-bottom: 20px;
+    color: ${colors.point};
   }
   a {
-    color: ${colors.point};
+    color: ${colors.pointGray};
+  }
+
+  @media screen and (max-width: ${size.size_500}) {
+    all: unset;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+    color: ${colors.pointGray};
+
+    .homeIcon {
+      margin-bottom: 0px;
+      color: ${colors.point};
+    }
+    a {
+      color: ${colors.pointGray};
+    }
+  }
+  @media screen and (max-width: ${size.size_435}) {
+    font-size: 24px;
+  }
+  @media screen and (max-width: ${size.size_368}) {
+    font-size: 24px;
   }
 `;
 
 const InfoWrap = styled.div`
   width: 330px;
   height: 150px;
-  background-color: #fff;
+  background-color: ${colors.point};
   border-radius: 20px;
   position: absolute;
-  bottom: 400px;
-  left: 16%;
+  top: 39%;
+  left: 178%;
   padding: 20px;
   display: ${(props) => props.$showAct};
   color: ${colors.fontGray_2};
+
+  @media screen and (max-width: ${size.size_500}) {
+    width: 330px;
+    height: 150px;
+    background-color: ${colors.point};
+    border-radius: 20px;
+    position: absolute;
+    top: -650%;
+    left: 16%;
+    padding: 20px;
+    display: ${(props) => props.$showAct};
+    color: ${colors.fontGray_2};
+  }
+  @media screen and (max-width: ${size.size_435}) {
+    width: 330px;
+    height: 150px;
+    background-color: ${colors.point};
+    border-radius: 20px;
+    position: absolute;
+    top: -650%;
+    left: 16%;
+    padding: 20px;
+    display: ${(props) => props.$showAct};
+    color: ${colors.fontGray_2};
+  }
+
+  @media screen and (max-width: ${size.size_368}) {
+    width: 330px;
+    height: 150px;
+    background-color: ${colors.point};
+    border-radius: 20px;
+    position: absolute;
+    top: -650%;
+    left: 16%;
+    padding: 20px;
+    display: ${(props) => props.$showAct};
+    color: ${colors.fontGray_2};
+  }
+`;
+
+const Box = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: ${colors.point};
+  position: absolute;
+  bottom: 7px;
+  left: -4px;
+  transform: rotate(35deg);
+  display: block;
+  @media screen and (max-width: ${size.size_500}) {
+    width: 20px;
+    height: 20px;
+    background-color: ${colors.point};
+    position: absolute;
+    bottom: 7px;
+    left: -4px;
+    transform: rotate(35deg);
+    display: none;
+  }
+  @media screen and (max-width: ${size.size_435}) {
+    display: none;
+  }
+  @media screen and (max-width: ${size.size_368}) {
+    display: none;
+  }
 `;
 const Info = styled.div`
   text-align: center;
-  color: ${colors.point};
+  color: #fff;
   font-weight: 700;
-  margin-top: 35px;
-`;
-const Git = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${colors.fontGray_2};
-  margin-top: -10px;
+  margin-top: 10px;
+  h4 {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 10px;
+  }
   a {
     text-decoration: none;
-    color: ${colors.fontGray_2};
+    color: #fff;
     margin-left: 5px;
   }
 `;
@@ -81,7 +215,7 @@ const Close = styled.div`
   bottom: 20px;
   right: 20px;
   font-weight: 700;
-  color: ${colors.point};
+  color: #fff;
   cursor: pointer;
 `;
 
@@ -99,12 +233,11 @@ export const Footer = () => {
       setShow(false);
     }
   };
-
   return (
-    <Container>
+    <Container onClick={closeHandler}>
       <Wrap>
-        <Con className="homeIcon">
-          <Link to={routes.home}>
+        <Con>
+          <Link to={routes.home} className="homeIcon">
             <FiHome />
           </Link>
         </Con>
@@ -126,14 +259,13 @@ export const Footer = () => {
         </Con>
 
         <InfoWrap $showAct={show ? "block" : "none"}>
+          <Box />
           <Info>
+            <h4>PARKING_BUSAN</h4>
             <p>&copy; KimYeonJI 2024</p>
-            <Git>
-              <p>github: </p>
-              <a href="https://github.com/kimyeonji713">
-                https://github.com/kimyeonji713
-              </a>
-            </Git>
+            <a href="https://github.com/kimyeonji713">
+              https://github.com/kimyeonji713
+            </a>
           </Info>
 
           <Close onClick={closeHandler}>닫기</Close>
@@ -142,78 +274,3 @@ export const Footer = () => {
     </Container>
   );
 };
-
-// const Container = styled.div`
-//   width: 500px;
-//   height: 80px;
-//   position: fixed;
-//   bottom: 0;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   background-color: white;
-//   z-index: 10;
-//   border-radius: 20px 20px 0 0;
-// `;
-// const Wrap = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin: 25px 20px;
-// `;
-// const Con = styled.button`
-//   all: unset;
-//   font-size: 25px;
-//   cursor: pointer;
-//   color: ${colors.point};
-
-//   a {
-//     color: ${colors.point};
-//   }
-
-//   .homeIcon {
-//     padding: 7px 8px 5px 8px;
-//     border-radius: 50%;
-//     background-color: ${colors.point};
-//     color: #fff;
-//   }
-// `;
-
-// const InfoWrap = styled.div`
-//   width: 330px;
-//   height: 150px;
-//   background-color: #fff;
-//   border-radius: 20px;
-//   position: absolute;
-//   bottom: 400px;
-//   left: 16%;
-//   padding: 20px;
-//   display: ${(props) => props.$showAct};
-//   color: ${colors.fontGray_2};
-// `;
-// const Info = styled.div`
-//   text-align: center;
-//   color: ${colors.point};
-//   font-weight: 700;
-//   margin-top: 35px;
-// `;
-// const Git = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: ${colors.fontGray_2};
-//   margin-top: -10px;
-//   a {
-//     text-decoration: none;
-//     color: ${colors.fontGray_2};
-//     margin-left: 5px;
-//   }
-// `;
-
-// const Close = styled.div`
-//   position: absolute;
-//   bottom: 20px;
-//   right: 20px;
-//   font-weight: 700;
-//   color: ${colors.point};
-//   cursor: pointer;
-// `;

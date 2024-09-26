@@ -12,6 +12,7 @@ export const colors = {
 export const size = {
   size_1024: "1024px",
   size_768: "768px",
+  size_500: "500px",
   size_435: "435px",
   size_368: "368px",
 };
