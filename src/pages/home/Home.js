@@ -9,22 +9,22 @@ import { Header } from "../../components/Header";
 
 const Container = styled.div`
   width: 100%;
-  height: 800px;
+  height: 100vh;
   margin: 0 auto;
   @media screen and (max-width: ${size.size_1024};) {
-    width: 1024px;
+    width: 100%;
   }
 
   @media screen and (max-width: ${size.size_768};) {
-    width: 768px;
+    width: 100%;
   }
 
   @media screen and (max-width: ${size.size_435};) {
-    width: 435px;
+    width: 100%;
   }
 
   @media screen and (max-width: ${size.size_368};) {
-    width: 368px;
+    width: 100%;
   }
 `;
 
