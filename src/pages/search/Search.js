@@ -56,9 +56,28 @@ const Form = styled.form`
 
 export const Search = () => {
   const [searchData, setSearchData] = useState();
-  const [searchRD, setSearchRD] = useState();
+  const [searchRD, setSearchRltD] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [keyData, setKeyData] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          response: {
+            body: {
+              items: { item },
+            },
+          },
+        } = await allParking();
+
+        setSearchData(item);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   const {
     register,
@@ -67,32 +86,25 @@ export const Search = () => {
     watch,
   } = useForm();
 
-  const onSearchResult = async (data) => {
-    const { keyword } = data;
-    try {
-      const {
-        response: {
-          body: {
-            items: { item },
-          },
-        },
-      } = await allParking();
+  // const onSearchResult = async (data) => {
+  //   const { keyword } = data;
+  //   try {
+  //     const {
+  //       response: {
+  //         body: {
+  //           items: { item },
+  //         },
+  //       },
+  //     } = await allParking();
 
-      setSearchData(item);
-      const searchResult = searchData.filter(
-        (item) =>
-          item.pkNam.includes(keyword) ||
-          item.jibunAddr.includes(keyword) ||
-          item.doroAddr.includes(keyword)
-      );
-      setSearchRD(searchResult);
-      setKeyData(keyword);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  //     setSearchData(item);
+  //     setKeyData(keyword);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  console.log(searchData);
   const nullKeyword = watch("keyword");
 
   return (
@@ -113,13 +125,13 @@ export const Search = () => {
         <ErrorMessage>{errors?.keyword?.message}</ErrorMessage>
       </Form>
 
-      {searchRD?.length === 0 && nullKeyword && (
+      {searchData?.length === 0 && nullKeyword && (
         <div>일치하는 검색 결과가 없습니다.</div>
       )}
 
       {searchData?.length > 0 && (
         <SearchResult
-          searchRD={searchData}
+          searchData={searchData}
           keyData={keyData}
           isLoading={isLoading}
         />

@@ -12,7 +12,12 @@ const Container = styled.div`
     opacity: 0.7;
   }
 `;
-const ResultBox = styled.div``;
+const ResultBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+  column-gap: 15px;
+`;
 const Wrap = styled.div``;
 const ConWrap = styled.div``;
 const AddrText = styled.div``;
@@ -22,6 +27,7 @@ const PayText = styled.div``;
 export const SearchResult = ({ searchData, keyData, isLoading }) => {
   const [favorData, setFavorData] = useState([]);
 
+  console.log(searchData);
   useEffect(() => {
     const saveFavor = JSON.parse(localStorage.getItem("favor")) || [];
     setFavorData(saveFavor);
