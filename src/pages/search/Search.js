@@ -50,11 +50,13 @@ const Form = styled.form`
     right: 32%;
     transform: translateX(-60%);
     color: ${colors.fontGray_2};
+    cursor: pointer;
   }
 `;
 
 export const Search = () => {
   const [searchData, setSearchData] = useState();
+  const [searchRD, setSearchRD] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [keyData, setKeyData] = useState("");
 
@@ -76,14 +78,14 @@ export const Search = () => {
         },
       } = await allParking();
 
+      setSearchData(item);
       const searchResult = searchData.filter(
         (item) =>
           item.pkNam.includes(keyword) ||
           item.jibunAddr.includes(keyword) ||
           item.doroAddr.includes(keyword)
       );
-
-      setSearchData(searchResult);
+      setSearchRD(searchResult);
       setKeyData(keyword);
       setIsLoading(false);
     } catch (error) {
@@ -111,13 +113,13 @@ export const Search = () => {
         <ErrorMessage>{errors?.keyword?.message}</ErrorMessage>
       </Form>
 
-      {searchData?.length === 0 && nullKeyword && (
+      {searchRD?.length === 0 && nullKeyword && (
         <div>일치하는 검색 결과가 없습니다.</div>
       )}
 
       {searchData?.length > 0 && (
         <SearchResult
-          searchData={searchData}
+          searchRD={searchData}
           keyData={keyData}
           isLoading={isLoading}
         />
